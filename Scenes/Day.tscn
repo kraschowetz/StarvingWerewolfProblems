@@ -1,7 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://4hwpaayci2wa"]
+[gd_scene load_steps=32 format=3 uid="uid://4hwpaayci2wa"]
 
 [ext_resource type="Texture2D" uid="uid://caj2cmjocrm6u" path="res://Sprites/Player/PlayerHuman.png" id="1_4k54i"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDay.gd" id="1_uisi5"]
+[ext_resource type="Texture2D" uid="uid://dsb4hn8gqmnxh" path="res://icon.svg" id="3_kcssh"]
+[ext_resource type="Texture2D" uid="uid://u5mgyub5oytg" path="res://Sprites/New Piskel.png" id="3_nnb3q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0h7y"]
 atlas = ExtResource("1_4k54i")
@@ -193,12 +195,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3flkv"]
 size = Vector2(33, 21)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_mcw8l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuwrj"]
+size = Vector2(128, 128)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xa4dk"]
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
 [node name="World" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(200, 216)
 script = ExtResource("1_uisi5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+light_mask = 2
+visibility_layer = 2
+z_index = 5
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_41emr")
 animation = &"WalkUp"
@@ -206,3 +220,38 @@ animation = &"WalkUp"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-1.5, 10.5)
 shape = SubResource("RectangleShape2D_3flkv")
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+position = Vector2(1, 8.99999)
+scale = Vector2(9, 9)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("3_nnb3q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.239216, 0.239216, 0.239216, 1)
+z_index = -100
+position = Vector2(583.25, 325.25)
+scale = Vector2(1163.5, 651.5)
+texture = SubResource("CanvasTexture_mcw8l")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(627, 328)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_kcssh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_xuwrj")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_xa4dk")
+
+[node name="ShadowFengShueiLuckFromAnimalCrossing" type="PointLight2D" parent="."]
+position = Vector2(587.25, 335.75)
+scale = Vector2(1175.5, 672.5)
+color = Color(0.752941, 0.752941, 0.752941, 1)
+blend_mode = 1
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("3_nnb3q")
