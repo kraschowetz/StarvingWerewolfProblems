@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://byfc626gl1abc"]
+
+[ext_resource type="Script" path="res://Scripts/Minigames/RockPaperScissorMinigame.gd" id="1_klkhq"]
+[ext_resource type="Texture2D" uid="uid://dpngtr83kk3q1" path="res://Sprites/UI/Rock.png" id="1_mjkqs"]
+[ext_resource type="Texture2D" uid="uid://bdcof5607kvdq" path="res://Sprites/UI/Paper.png" id="2_opccf"]
+[ext_resource type="Texture2D" uid="uid://c7eee3p8hvsvp" path="res://Sprites/UI/Scissor.png" id="3_64gtr"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_amjfx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6if4"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyjsc"]
+
+[node name="RockPaperScissorMinigame" type="Control" node_paths=PackedStringArray("icon", "result", "chance_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_klkhq")
+icon = NodePath("Icon")
+result = NodePath("ResultLabel")
+chance_label = NodePath("Chances")
+textures = Array[Texture2D]([ExtResource("1_mjkqs"), ExtResource("2_opccf"), ExtResource("3_64gtr")])
+
+[node name="BG" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.607843)
+position = Vector2(527.75, 287.75)
+scale = Vector2(1056.5, 576.5)
+texture = SubResource("CanvasTexture_amjfx")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1054.0
+offset_bottom = 33.0
+text = "ROCK PAPER SCISSOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chances" type="Label" parent="."]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 1054.0
+offset_bottom = 61.0
+text = "3/3
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(520, 150)
+scale = Vector2(6, 6)
+texture = ExtResource("1_mjkqs")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 256.0
+offset_right = 357.0
+offset_bottom = 280.0
+scale = Vector2(3, 3)
+mouse_default_cursor_shape = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_b6if4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyjsc")
+icon = ExtResource("1_mjkqs")
+flat = true
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 256.0
+offset_right = 513.0
+offset_bottom = 280.0
+scale = Vector2(3, 3)
+mouse_default_cursor_shape = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_b6if4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyjsc")
+icon = ExtResource("2_opccf")
+flat = true
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 667.0
+offset_top = 256.0
+offset_right = 691.0
+offset_bottom = 280.0
+scale = Vector2(3, 3)
+mouse_default_cursor_shape = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_b6if4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyjsc")
+icon = ExtResource("3_64gtr")
+flat = true
+
+[node name="ResultLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 191.0
+offset_right = 1057.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 50
+text = "YOU WIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
