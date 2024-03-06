@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://4hwpaayci2wa"]
+[gd_scene load_steps=52 format=3 uid="uid://4hwpaayci2wa"]
 
 [ext_resource type="Texture2D" uid="uid://caj2cmjocrm6u" path="res://Sprites/Player/PlayerHuman.png" id="1_4k54i"]
 [ext_resource type="Script" path="res://Scripts/UI/CycleTimer.gd" id="1_atd42"]
+[ext_resource type="Script" path="res://Scripts/World/Day.gd" id="1_g1tnb"]
 [ext_resource type="Texture2D" uid="uid://5743cbpipx26" path="res://Sprites/UI/Sun.png" id="1_l46lr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDay.gd" id="1_uisi5"]
 [ext_resource type="Texture2D" uid="uid://bjst3hlahu6b5" path="res://Sprites/UI/BarUnder.png" id="2_vxxou"]
@@ -13,9 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://btyqlquskegvs" path="res://Sprites/TileSets/TileSetDay.png" id="5_mwyt4"]
 [ext_resource type="Texture2D" uid="uid://cb6m24r1my1r1" path="res://Sprites/Props/TownHall.png" id="7_1c6ct"]
 [ext_resource type="Texture2D" uid="uid://drl3pljg1qk5t" path="res://Sprites/Props/Tree.png" id="7_40xkd"]
-[ext_resource type="Script" path="res://Scripts/NPCs/MiniGameGiver.gd" id="9_7vkyg"]
-[ext_resource type="Texture2D" uid="uid://bhxbchei4mam6" path="res://Sprites/NPC/GenericQuestGiver.png" id="9_urp11"]
-[ext_resource type="PackedScene" uid="uid://byfc626gl1abc" path="res://Minigames/RockPaperScissorMinigame.tscn" id="10_83ytc"]
+[ext_resource type="PackedScene" uid="uid://cm3fnlcstv8gl" path="res://Prefabs/QuestGivers/QuestGiver1.tscn" id="10_llsgw"]
+[ext_resource type="Script" path="res://Scripts/World/PayArea.gd" id="12_ybkd6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0h7y"]
 atlas = ExtResource("1_4k54i")
@@ -207,33 +207,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3flkv"]
 size = Vector2(33, 21)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_40msr"]
-atlas = ExtResource("9_urp11")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u802w"]
-atlas = ExtResource("9_urp11")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nhyqc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_40msr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u802w")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mbmy"]
-size = Vector2(29, 21)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w4nl"]
-size = Vector2(54, 52)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgim8"]
+size = Vector2(189, 61)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0clvo"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 0.5, -8, 0.75)
@@ -289,6 +264,9 @@ size = Vector2(288, 150)
 size = Vector2(33, 45)
 
 [node name="Day" type="Node2D"]
+script = ExtResource("1_g1tnb")
+quest_givers = Array[PackedScene]([ExtResource("10_llsgw")])
+possible_pos = Array[Vector2]([Vector2(561, 187), Vector2(1698, 180), Vector2(988, 158), Vector2(425, 543), Vector2(667, 609), Vector2(477, 1244), Vector2(986, 1221), Vector2(909, 1395), Vector2(486, 1528), Vector2(1420, 1207), Vector2(1774, 930), Vector2(1402, 147), Vector2(1413, 258), Vector2(1835, 421), Vector2(1304, 777)])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -379,50 +357,16 @@ position_smoothing_enabled = true
 [node name="Timer" type="Timer" parent="Player"]
 autostart = true
 
-[node name="QuestGiver" type="RigidBody2D" parent="."]
-position = Vector2(561, 187)
-gravity_scale = 0.0
-script = ExtResource("9_7vkyg")
-minigame = ExtResource("10_83ytc")
+[node name="PayArea" type="StaticBody2D" parent="."]
+position = Vector2(984, 879)
+script = ExtResource("12_ybkd6")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="QuestGiver"]
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_nhyqc")
-autoplay = "default"
-frame_progress = 0.669651
+[node name="Area2D" type="Area2D" parent="PayArea"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestGiver"]
-position = Vector2(0.5, 13.5)
-shape = SubResource("RectangleShape2D_6mbmy")
-
-[node name="Area2D" type="Area2D" parent="QuestGiver"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestGiver/Area2D"]
-shape = SubResource("RectangleShape2D_3w4nl")
-
-[node name="Label" type="Label" parent="QuestGiver"]
-offset_left = -11.0
-offset_top = -81.0
-offset_right = 16.0
-offset_bottom = -36.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "$"
-
-[node name="Control" type="Control" parent="QuestGiver"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -27.0
-offset_top = -26.0
-offset_right = 27.0
-offset_bottom = 26.0
-mouse_filter = 1
-mouse_force_pass_scroll_events = false
-mouse_default_cursor_shape = 2
-
-[node name="Timer" type="Timer" parent="QuestGiver"]
-autostart = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PayArea/Area2D"]
+position = Vector2(0.5, 29.5)
+shape = SubResource("RectangleShape2D_dgim8")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -10
@@ -791,4 +735,4 @@ position = Vector2(4.5, 19.5)
 shape = SubResource("RectangleShape2D_y0hfy")
 
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
-[connection signal="timeout" from="QuestGiver/Timer" to="QuestGiver" method="_on_timer_timeout"]
+[connection signal="body_entered" from="PayArea/Area2D" to="PayArea" method="_on_area_2d_body_entered"]

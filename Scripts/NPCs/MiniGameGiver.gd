@@ -20,10 +20,7 @@ func _ready() -> void:
 	icon_dir *= -1
 
 func _process(_delta) -> void:
-	if player.position.y > position.y:
-		sprite.z_index = -1
-	else:
-		sprite.z_index = 1
+	sprite.z_index = position.y
 	
 	if !selected: return
 	if !Input.is_action_just_released("lmb"): return

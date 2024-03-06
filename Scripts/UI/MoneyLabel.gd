@@ -7,6 +7,7 @@ var tween: Tween
 
 func _ready() -> void:
 	Global.change_money.connect(on_money_changed)
+	on_money_changed()
 
 func on_tween_fineshed() -> void:
 	sub_label.text = ""

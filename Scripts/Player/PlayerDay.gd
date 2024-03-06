@@ -22,6 +22,7 @@ func handle_animations() -> void:
 		prev_dir.y = 0
 	
 	sprite.flip_h = true if prev_dir == Vector2.LEFT else false
+	sprite.z_index = position.y
 	
 	if velocity == Vector2.ZERO:
 		match prev_dir:

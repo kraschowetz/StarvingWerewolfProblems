@@ -13,4 +13,10 @@ func on_timeout() -> void:
 	Global.in_minigame = false
 	if get_tree().current_scene.name == "Night":
 		Global.day += 1
-	get_tree().call_deferred("change_scene_to_file", path)
+		Global.hunger += 10 + randi_range(0, 15)
+		Global.current_trans_data = ["%s" % Global.hunger, "HUNGER", path, "THE SUN RISES"]
+	else:
+		Global.debt += 10 + randi_range(0, 15)
+		Global.current_trans_data = ["%s" % Global.debt, "DEBT", path, "THE SUN FALLS"]
+	
+	get_tree().call_deferred("change_scene_to_file", "res://Scenes/Transition.tscn")
