@@ -6,7 +6,7 @@ extends Control
 func _ready() -> void:
 	var tween: Tween = get_tree().create_tween()
 	var t: int = 1 if get_tree().current_scene.name == "Day" else 2
-	tween.tween_property(bar, "size", Vector2(0, 16), 30 * t)
+	tween.tween_property(bar, "size", Vector2(0, 16), 10 * t)
 	tween.finished.connect(on_timeout)
 
 func on_timeout() -> void:

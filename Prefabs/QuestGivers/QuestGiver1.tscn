@@ -55,7 +55,7 @@ shape = SubResource("RectangleShape2D_6mbmy")
 shape = SubResource("RectangleShape2D_3w4nl")
 
 [node name="Label" type="Label" parent="."]
-z_index = 99
+z_index = 4096
 offset_left = -11.0
 offset_top = -81.0
 offset_right = 16.0

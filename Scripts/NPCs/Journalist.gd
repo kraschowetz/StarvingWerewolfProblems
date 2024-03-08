@@ -20,15 +20,39 @@ var paths_ammount: int
 
 var scared: bool = false
 var speed = 90
+var player_in_line_of_sight: bool = false
 
 """
 	X: 15-1953
 	y: 18-1704
 """
 
+func check_for_player() -> void:
+	if scared: return
+	
+	if position.distance_to(player.position) < 100:
+		scared = true
+		agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
+		speed = speed * 2.5
+		Global.popularity += base_fame_increase
+		Global.fear += base_infamy_increase
+		Global.spotted_lvl = 2
+		return
+	
+	ray.target_position = player.position - position
+	if !player_in_line_of_sight: return
+	if !ray.get_collider(): return
+	if ray.get_collider().name == "Player" && !scared:
+		scared = true
+		agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
+		speed = speed * 2.5
+		Global.popularity += base_fame_increase
+		Global.fear += base_infamy_increase
+		Global.spotted_lvl = 2
+
 func _ready() -> void:
 	world_target = randi_range(0, world.civilian_target_pos.size() -1)
-	paths_ammount = randi_range(2, 8)
+	paths_ammount = 99
 
 func _process(delta) -> void:
 	var dir = to_local(agent.get_next_path_position()).normalized()
@@ -36,30 +60,18 @@ func _process(delta) -> void:
 	
 	$Sprite2D.z_index = position.y
 	
-	ray.target_position = player.position - position
-	if (ray.get_collision_point() - position).length() < detection_range:
-		if !ray.get_collider(): return
-		if ray.get_collider().name == "Player" && !scared:
-			scared = true
-			agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
-			speed = speed * 2.5
-			Global.popularity += base_fame_increase
-			Global.fear += base_infamy_increase
+	check_for_player()
 	
 	if scared || exit_pos > -1:
 		if position.x < 20 || position.x > 1950:
 			if scared:
 				Global.fear += base_infamy_increase * 2
 				Global.popularity += base_fame_increase
-				if Global.spotted_lvl < 1:
-					Global.spotted_lvl = 1
 			queue_free()
 		if position.y < 22 || position.y > 1700:
 			if scared:
 				Global.fear += base_infamy_increase * 2
 				Global.popularity += base_fame_increase
-				if Global.spotted_lvl < 1:
-					Global.spotted_lvl = 1
 			queue_free()
 	
 	if light_pivot:
@@ -91,3 +103,12 @@ func _on_area_2d_body_entered(body):
 		speed = 0
 		Global.hunger -= 2
 		$Sprite2D.texture = _skull
+
+
+func _on_visibility_area_body_entered(body):
+	if body.name == "Player":
+		player_in_line_of_sight = true
+
+func _on_visibility_area_body_exited(body):
+	if body.name == "Player":
+		player_in_line_of_sight = false

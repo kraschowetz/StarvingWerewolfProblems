@@ -25,7 +25,7 @@ func set_result(won: bool, spr: int, spr2: int, spr3) -> void:
 		icon.self_modulate = Color("777777")
 		result.text = "YOU WIN"
 		result.self_modulate = Color(0, 1, 0, 1)
-		Global.money += 3
+		Global.money += 3 + randi_range(0, 2)
 		Global.change_money.emit()
 	elif randi_range(0, 1) == 0:
 		icon.texture = textures[spr3]

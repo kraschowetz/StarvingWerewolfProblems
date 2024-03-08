@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cswruvthmm73j"]
+
+[ext_resource type="Script" path="res://Scripts/NPCs/Civilian.gd" id="1_1kujb"]
+[ext_resource type="Texture2D" uid="uid://c4rsd4h87sp2o" path="res://Sprites/NPC/Skull.png" id="2_14jcd"]
+[ext_resource type="Texture2D" uid="uid://bhxbchei4mam6" path="res://Sprites/NPC/GenericQuestGiver.png" id="2_f3c0e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p417u"]
+size = Vector2(30, 42)
+
+[node name="Civilian" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_1kujb")
+detection_range = 200
+_skull = ExtResource("2_14jcd")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_f3c0e")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_p417u")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

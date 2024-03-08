@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjblombqb3mi0"]
+[gd_scene load_steps=5 format=3 uid="uid://bjblombqb3mi0"]
 
 [ext_resource type="Script" path="res://Scripts/World/Transition.gd" id="1_kh0s7"]
+[ext_resource type="Texture2D" uid="uid://powa8m02y66h" path="res://Sprites/UI/Termometer.png" id="2_tf2da"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_li0ai"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q3csr"]
 
-[node name="Transition" type="Node2D" node_paths=PackedStringArray("bar", "label", "title")]
+[node name="Transition" type="Node2D" node_paths=PackedStringArray("bar", "label", "title", "fame")]
 script = ExtResource("1_kh0s7")
 bar = NodePath("Bar")
 label = NodePath("Label2")
 title = NodePath("Label")
+fame = NodePath("Label3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -28,17 +30,17 @@ vertical_alignment = 1
 
 [node name="BG" type="TextureRect" parent="."]
 modulate = Color(0.411765, 0.411765, 0.411765, 1)
-offset_left = 546.0
+offset_left = 576.0
 offset_top = 420.0
-offset_right = 586.0
+offset_right = 672.0
 offset_bottom = 708.0
 rotation = 3.14159
 texture = SubResource("CanvasTexture_q3csr")
 
 [node name="Bar" type="TextureRect" parent="."]
-offset_left = 546.0
+offset_left = 576.0
 offset_top = 420.0
-offset_right = 586.0
+offset_right = 672.0
 offset_bottom = 708.0
 rotation = 3.14159
 texture = SubResource("CanvasTexture_q3csr")
@@ -51,3 +53,17 @@ theme_override_font_sizes/font_size = 25
 text = "DEBT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -4.0
+offset_top = 495.0
+offset_right = 1052.0
+offset_bottom = 523.0
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Termometer" type="Sprite2D" parent="."]
+position = Vector2(528, 276)
+scale = Vector2(3, 3)
+texture = ExtResource("2_tf2da")

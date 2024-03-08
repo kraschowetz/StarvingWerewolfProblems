@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqbbdlfd0o0ex"]
+
+[ext_resource type="Texture2D" uid="uid://b3obv86v447wc" path="res://Sprites/UI/Newspaper.png" id="1_uv2b1"]
+[ext_resource type="Script" path="res://Scripts/World/NewsPaper.gd" id="1_yqw7n"]
+
+[node name="NewsPaper" type="Node2D"]
+script = ExtResource("1_yqw7n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3.126)
+texture = ExtResource("1_uv2b1")
+centered = false
+
+[node name="Head" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 54.0
+offset_right = 906.0
+offset_bottom = 161.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = " WEREWOLF SPOTTED IN TOWN!"
+vertical_alignment = 1
+
+[node name="ComunityPollHead" type="Label" parent="."]
+offset_left = 603.0
+offset_top = 219.0
+offset_right = 906.0
+offset_bottom = 272.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = " werewolf popularity poll"
+vertical_alignment = 1
+
+[node name="ComunityPoll" type="Label" parent="."]
+offset_left = 614.0
+offset_top = 328.0
+offset_right = 906.0
+offset_bottom = 599.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 17
+text = "
+ FAME: 100%
+ INFAME: 100%
+ 
+ Townsfolk have mixed opinions on the werewolf legend"
+autowrap_mode = 3
+
+[node name="Lorem Ipsum" type="Label" parent="."]
+offset_left = 156.0
+offset_top = 228.0
+offset_right = 553.0
+offset_bottom = 597.0
+theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_font_sizes/font_size = 17
+text = "DOG CHASES COURRIER
+
+  \"That motivates me to go to the mojave, there are no dogs there\" - Courier
+
+LOCAL DETECTIVE THINKS  HE'S A BAT
+
+  Bruceling, local detective loves bats so much that he sleeps hanged in the roof upside down
+
+ARE TREES A REAL THING?
+  \"I don't think so\" - says specialist
+"
+autowrap_mode = 3
