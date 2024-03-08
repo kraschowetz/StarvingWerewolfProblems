@@ -7,7 +7,7 @@ var hunger: int = 10
 var debt: int = 50
 var day: int = 1
 var current_trans_data: Array[String] = ["", "", "", ""]
-var last_trans_val: Array[int] = [1, 1]
+var last_trans_val: Array[int] = [100, 1]
 
 var popularity: int = 0
 var fear: int = 0

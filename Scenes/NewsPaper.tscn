@@ -5,6 +5,9 @@
 
 [node name="NewsPaper" type="Node2D"]
 script = ExtResource("1_yqw7n")
+spotted_lvl_0_headers = Array[String]([" EVERYHING CHILL IN TOWN", " THE MOST NORMAL TOWN", " CRIME RATE DROPS TO 0%"])
+spotted_lvl_1_headers = Array[String]([" WEREWOLF: MYTH OR REAL?", " 1st CRIME IN DECADES", " ARE MONSTERS REAL?"])
+spotted_lvl_2_headers = Array[String]([" WEREWOLF SPOTTED IN TOWN", " ARE MONSTERS REAL?", " RAGING MONSTER KILLS ONE"])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3.126)
@@ -18,7 +21,7 @@ offset_right = 906.0
 offset_bottom = 161.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = " WEREWOLF SPOTTED IN TOWN!"
+text = " RAGING MONSTER KILLS ONE"
 vertical_alignment = 1
 
 [node name="ComunityPollHead" type="Label" parent="."]
@@ -61,6 +64,6 @@ LOCAL DETECTIVE THINKS  HE'S A BAT
   Bruceling, local detective loves bats so much that he sleeps hanged in the roof upside down
 
 ARE TREES A REAL THING?
-  \"I don't think so\" - says specialist
+  \"I don't think so\" - says specialist, Giuseppe Cadura
 "
 autowrap_mode = 3

@@ -3,6 +3,10 @@ extends Node2D
 @onready var header = $Head
 @onready var comunity_poll = $ComunityPoll
 
+@export var spotted_lvl_0_headers: Array[String]
+@export var spotted_lvl_1_headers: Array[String]
+@export var spotted_lvl_2_headers: Array[String]
+
 func _input(event) -> void:
 	if event is InputEventMouseMotion: return
 	Global.spotted_lvl = 0
@@ -11,11 +15,11 @@ func _input(event) -> void:
 func gen_header() -> String:
 	match Global.spotted_lvl:
 		0:
-			return " EVERYHING CHILL IN TOWN"
+			return spotted_lvl_0_headers[randi_range(0, spotted_lvl_0_headers.size() - 1)]
 		1:
-			return " WEREWOLF: MYTH OR REAL?"
+			return spotted_lvl_1_headers[randi_range(0, spotted_lvl_1_headers.size() - 1)]
 		2:
-			return " WEREWOLF SPOTTED IN TOWN"
+			return spotted_lvl_2_headers[randi_range(0, spotted_lvl_2_headers.size() - 1)]
 	return " HOW DID WE GET HERE?"
 
 func gen_poll_text() -> String:

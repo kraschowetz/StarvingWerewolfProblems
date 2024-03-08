@@ -8,9 +8,6 @@ extends Node2D
 func _ready() -> void:
 	var i: int = 0 if Global.current_trans_data[1] == "DEBT" else 1
 	
-	if i == 1:
-		fame.text = "%s" % Global.popularity + "% fame   " + "%s" % Global.fear +"% infamy" 
-	
 	bar.size.y = 288 / (100 / Global.last_trans_val[i])
 	print(Global.last_trans_val[i])
 	

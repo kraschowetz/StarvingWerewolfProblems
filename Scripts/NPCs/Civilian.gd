@@ -19,12 +19,8 @@ var exit_pos: int = -1
 var paths_ammount: int
 
 var scared: bool = false
+var dead: bool = false
 var speed = 90
-
-"""
-	X: 15-1953
-	y: 18-1704
-"""
 
 func _ready() -> void:
 	world_target = randi_range(0, world.civilian_target_pos.size() -1)
@@ -89,5 +85,6 @@ func _on_timer_timeout():
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
 		speed = 0
-		Global.hunger -= 2
+		Global.hunger -= 4
 		$Sprite2D.texture = _skull
+		dead = true
