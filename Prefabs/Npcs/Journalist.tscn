@@ -14,8 +14,8 @@ points = PackedVector2Array(0, 0, 0, 68, 384, 188, 384, -124)
 [node name="Journalist" type="CharacterBody2D" node_paths=PackedStringArray("light_pivot", "ref_pivot")]
 z_index = 1
 script = ExtResource("1_w0ywj")
-base_fame_increase = 4
-base_infamy_increase = 4
+base_fame_increase = 10
+base_infamy_increase = 5
 _skull = ExtResource("2_xbkxw")
 light_pivot = NodePath("Pivot")
 ref_pivot = NodePath("RefPivot")
@@ -28,6 +28,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

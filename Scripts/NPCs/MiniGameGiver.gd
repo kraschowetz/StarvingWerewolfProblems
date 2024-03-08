@@ -8,6 +8,7 @@ extends Node2D
 @export var minigame: PackedScene
 
 var selected: bool = false
+var closed: bool = false
 var icon_dir: int = 1
 
 func _ready() -> void:
@@ -22,11 +23,14 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	sprite.z_index = position.y
 	
+	if closed: return
 	if !selected: return
 	if !Input.is_action_just_released("lmb"): return
 	if Global.in_minigame: return
 	
 	var game = minigame.instantiate()
+	closed = true
+	label.visible = false
 	get_node("../CanvasLayer").call_deferred("add_child", game)
 
 func on_mouse_entered() -> void:

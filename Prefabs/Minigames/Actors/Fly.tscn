@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8wbrykkdgdmm"]
+
+[ext_resource type="Texture2D" uid="uid://b1sd5a1jn0orf" path="res://Sprites/UI/Moon.png" id="1_uu4dc"]
+[ext_resource type="Script" path="res://Scripts/Minigames/Fly.gd" id="2_li8w8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtgve"]
+
+[node name="Fly" type="Button"]
+offset_left = 1056.0
+offset_top = 576.0
+offset_right = 1080.0
+offset_bottom = 600.0
+scale = Vector2(3, 3)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vtgve")
+icon = ExtResource("1_uu4dc")
+flat = true
+icon_alignment = 1
+script = ExtResource("2_li8w8")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="ExitTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

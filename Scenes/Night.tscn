@@ -420,6 +420,9 @@ position_smoothing_enabled = true
 [node name="Timer" type="Timer" parent="Player"]
 autostart = true
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Player"]
+radius = 57.14
+
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -10
 scale = Vector2(3, 3)

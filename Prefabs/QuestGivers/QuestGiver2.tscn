@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqt8mf5qxrrfb"]
+
+[ext_resource type="Script" path="res://Scripts/NPCs/MiniGameGiver.gd" id="1_l1xgq"]
+[ext_resource type="PackedScene" uid="uid://cgugr20erp6hy" path="res://Prefabs/Minigames/FlySmackerMinigame.tscn" id="2_50kib"]
+[ext_resource type="Texture2D" uid="uid://bhxbchei4mam6" path="res://Sprites/NPC/GenericQuestGiver.png" id="3_scg2k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40msr"]
+atlas = ExtResource("3_scg2k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u802w"]
+atlas = ExtResource("3_scg2k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nhyqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40msr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u802w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mbmy"]
+size = Vector2(29, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w4nl"]
+size = Vector2(54, 52)
+
+[node name="QuestGiver" type="RigidBody2D"]
+position = Vector2(561, 187)
+gravity_scale = 0.0
+script = ExtResource("1_l1xgq")
+minigame = ExtResource("2_50kib")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_nhyqc")
+autoplay = "default"
+frame_progress = 0.669651
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 13.5)
+shape = SubResource("RectangleShape2D_6mbmy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_3w4nl")
+
+[node name="Label" type="Label" parent="."]
+z_index = 4096
+offset_left = -11.0
+offset_top = -81.0
+offset_right = 16.0
+offset_bottom = -36.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "$"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -27.0
+offset_top = -26.0
+offset_right = 27.0
+offset_bottom = 26.0
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

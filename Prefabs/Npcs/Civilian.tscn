@@ -10,6 +10,8 @@ size = Vector2(30, 42)
 [node name="Civilian" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_1kujb")
+base_fame_increase = 3
+base_infamy_increase = 3
 detection_range = 200
 _skull = ExtResource("2_14jcd")
 metadata/_edit_group_ = true
@@ -21,6 +23,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

@@ -8,7 +8,7 @@ var used_positions: Array[int]
 func _ready() -> void:
 	var m = randi_range(2, 5)
 	for n in range(m):
-		var npc = quest_givers[0].instantiate()
+		var npc = quest_givers[randi_range(0, quest_givers.size() - 1)].instantiate()
 		var pos: int = randi_range(0, possible_pos.size() - 1)
 		
 		for i in range(used_positions.size()):
