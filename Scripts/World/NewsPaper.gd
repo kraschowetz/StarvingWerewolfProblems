@@ -20,6 +20,8 @@ func gen_header() -> String:
 			return spotted_lvl_1_headers[randi_range(0, spotted_lvl_1_headers.size() - 1)]
 		2:
 			return spotted_lvl_2_headers[randi_range(0, spotted_lvl_2_headers.size() - 1)]
+		3:
+			return " WEREWOLF HURT BY A GUARD!"
 	return " HOW DID WE GET HERE?"
 
 func gen_poll_text() -> String:
@@ -39,4 +41,5 @@ func gen_poll_text() -> String:
 func _ready() -> void:
 	header.text = gen_header()
 	
+	$Day.text = "day %s" % Global.day
 	comunity_poll.text = "\n FAME: %s" % Global.popularity + "%" + "\n INFAME %s" % Global.fear + "%\n\n" + gen_poll_text()

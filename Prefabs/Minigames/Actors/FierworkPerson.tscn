@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceuo2bbq2p6m7"]
+
+[ext_resource type="Texture2D" uid="uid://b4ygrrtdww55v" path="res://Sprites/Actors/FireworkPerson.png" id="1_frfaq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1fhk"]
+atlas = ExtResource("1_frfaq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf2m0"]
+atlas = ExtResource("1_frfaq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5yiq"]
+atlas = ExtResource("1_frfaq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7hig"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1fhk")
+}],
+"loop": true,
+"name": &"Happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf2m0")
+}],
+"loop": true,
+"name": &"Sad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5yiq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Person" type="AnimatedSprite2D"]
+position = Vector2(100, 527)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_s7hig")
+animation = &"Happy"
+autoplay = "default"

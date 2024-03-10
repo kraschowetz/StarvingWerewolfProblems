@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cp0urtlsp0g0x"]
+[gd_scene load_steps=75 format=3 uid="uid://cp0urtlsp0g0x"]
 
 [ext_resource type="Script" path="res://Scripts/World/Night.gd" id="1_38hvu"]
 [ext_resource type="Script" path="res://Scripts/UI/CycleTimer.gd" id="1_8476l"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cswruvthmm73j" path="res://Prefabs/Npcs/Civilian.tscn" id="9_0cttw"]
 [ext_resource type="Texture2D" uid="uid://8eiinhjmnsd3" path="res://Sprites/Player/PlayerMonster.png" id="11_gfj4o"]
 [ext_resource type="PackedScene" uid="uid://dpdwmxywxgvt" path="res://Prefabs/Npcs/Journalist.tscn" id="15_57y8w"]
+[ext_resource type="PackedScene" uid="uid://beys8tgm838un" path="res://Prefabs/Npcs/Guard.tscn" id="17_hrw27"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mi1fm"]
 atlas = ExtResource("11_gfj4o")
@@ -314,15 +315,22 @@ polygon = PackedVector2Array(21, -3, -12, -3, -12, 27, 21, 26)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_15fhf"]
 polygon = PackedVector2Array(-21, 42, 24, 42, 21, -3, -12, -3)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h4jiw"]
+vertices = PackedVector2Array(1334, 1246, 1897, 1209, 1953, 1210, 1926, 1432, 1619, 1434, 1953, 1712, 1923, 1604, 1901, 392, 1899, 470, 1621, 957, 1561, 956, 1146, 887, 1144, 718, 1162, 157, 1889, 204, 1955, 474, 1955, 1134, 1895, 1134, 1621, 1027, 255, 1711, 269, 1689, 1621, 1603, 1170, 1585, 1097, 1585, 739, 1581, 810, 1581, 263, 1679, 1897, 1154, 1332, 1075, 1554, 1025, 1165, 1518, 1025, 1246, 1110, 1518, 805, 1514, 161, 1554, 182, 1679, 184, 1710, 14, 1713, 89, 1554, 1952, 202, 1951, 392, 1887, 126, 1157, 92, 15, 15, 1954, 22, 1952, 127, 1104, 92, 1094, 157, 838, 718, 101, 1489, 1025, 1074, 837, 890, 749, 1514, 154, 1488)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(3, 2, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 9, 8), PackedInt32Array(6, 5, 19, 20, 21), PackedInt32Array(22, 21, 20, 23), PackedInt32Array(24, 25, 23, 20, 26), PackedInt32Array(18, 17, 27, 1, 0, 28, 29), PackedInt32Array(0, 4, 21, 22, 30), PackedInt32Array(31, 0, 30, 32, 33), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(14, 39, 40, 7), PackedInt32Array(41, 14, 13, 42), PackedInt32Array(43, 44, 45, 41, 42), PackedInt32Array(43, 42, 46), PackedInt32Array(43, 46, 47, 48, 49), PackedInt32Array(11, 10, 29, 28, 50, 51), PackedInt32Array(23, 25, 33, 32), PackedInt32Array(52, 24, 26, 35, 34, 53, 51), PackedInt32Array(47, 13, 12, 48), PackedInt32Array(38, 37, 43, 49), PackedInt32Array(49, 48, 51, 53), PackedInt32Array(52, 51, 50, 31, 33)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1964, 1723, 1963, 1201, 1907, 1199, 1907, 1153, 1906, 1144, 1966, 1145, 1965, 465, 1909, 461, 1911, 402, 1961, 402, 1963, 192, 1899, 194, 1897, 136, 1962, 138, 1965, 13, 6, 5, 4, 1724, 195, 1720, 193, 1689, 257, 1689, 238, 1721), PackedVector2Array(1913, 1594, 1631, 1593, 1629, 1444, 1916, 1442), PackedVector2Array(1446, 1514, 1436, 1559, 1484, 1560, 1477, 1513), PackedVector2Array(1118, 1528, 1156, 1528, 1159, 1575, 1109, 1575), PackedVector2Array(758, 1524, 796, 1524, 799, 1571, 751, 1571), PackedVector2Array(109, 1499, 145, 1498, 150, 1544, 101, 1544), PackedVector2Array(389, 1228, 436, 1230, 432, 1182, 372, 1183, 361, 1044, 77, 1045, 75, 1196, 364, 1195), PackedVector2Array(648, 1232, 936, 1234, 937, 1081, 650, 1079), PackedVector2Array(1035, 1084, 1322, 1085, 1324, 1236, 1035, 1236), PackedVector2Array(1570, 966, 1611, 967, 1611, 1017, 1565, 1015), PackedVector2Array(1895, 886, 1895, 734, 1607, 738, 1609, 886), PackedVector2Array(365, 872, 365, 720, 77, 723, 77, 871), PackedVector2Array(85, 552, 373, 553, 374, 402, 87, 403), PackedVector2Array(98, 148, 144, 148, 142, 102, 105, 103), PackedVector2Array(818, 153, 815, 109, 782, 109, 773, 152), PackedVector2Array(1113, 102, 1148, 102, 1151, 147, 1106, 147), PackedVector2Array(1136, 877, 847, 880, 848, 728, 1134, 728), PackedVector2Array(637, 568, 925, 569, 924, 419, 637, 419), PackedVector2Array(1039, 572, 1326, 573, 1327, 423, 1038, 424)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
 [node name="Night" type="Node2D"]
 script = ExtResource("1_38hvu")
 civilian_target_pos = Array[Vector2]([Vector2(564, 234), Vector2(558, 1315), Vector2(1430, 1280), Vector2(1411, 246)])
 civilian_start_pos = Array[Vector2]([Vector2(973, -29), Vector2(-23, 245), Vector2(2002, 228), Vector2(1987, 1319), Vector2(989, 1751), Vector2(-29, 1293)])
+guard = ExtResource("17_hrw27")
 civilian = ExtResource("9_0cttw")
 journalist = ExtResource("15_57y8w")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -880,6 +888,11 @@ shape = SubResource("RectangleShape2D_y0hfy")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Tree13"]
 occluder = SubResource("OccluderPolygon2D_15fhf")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_h4jiw")
+navigation_layers = 2
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]

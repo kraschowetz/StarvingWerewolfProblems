@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://beys8tgm838un"]
+
+[ext_resource type="Script" path="res://Scripts/NPCs/Journalist.gd" id="1_mpt54"]
+[ext_resource type="Texture2D" uid="uid://c4rsd4h87sp2o" path="res://Sprites/NPC/Skull.png" id="2_ox35a"]
+[ext_resource type="Texture2D" uid="uid://bhxbchei4mam6" path="res://Sprites/NPC/GenericQuestGiver.png" id="3_jx40a"]
+[ext_resource type="Texture2D" uid="uid://c3gulf3esrd3y" path="res://Sprites/FX/ConeLight.png" id="4_tqhd6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p417u"]
+size = Vector2(30, 42)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5iuon"]
+points = PackedVector2Array(0, 8, 0, 60, 289, 153, 289, -86)
+
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("light_pivot", "ref_pivot")]
+z_index = 1
+script = ExtResource("1_mpt54")
+base_fame_increase = 3
+base_infamy_increase = 12
+detection_range = 50
+_skull = ExtResource("2_ox35a")
+light_pivot = NodePath("Pivot")
+ref_pivot = NodePath("RefPivot")
+guard = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_jx40a")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 5.0
+avoidance_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="PhotoTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_p417u")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Pivot"]
+color = Color(0.466667, 0.466667, 0.466667, 1)
+blend_mode = 2
+range_z_max = 2048
+shadow_enabled = true
+texture = ExtResource("4_tqhd6")
+offset = Vector2(160.61, 0)
+texture_scale = 1.5
+
+[node name="VisibilityArea" type="Area2D" parent="Pivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/VisibilityArea"]
+position = Vector2(16, -32)
+shape = SubResource("ConvexPolygonShape2D_5iuon")
+
+[node name="RefPivot" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PhotoTimer" to="." method="_on_photo_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Pivot/VisibilityArea" to="." method="_on_visibility_area_area_entered"]
+[connection signal="body_entered" from="Pivot/VisibilityArea" to="." method="_on_visibility_area_body_entered"]
+[connection signal="body_exited" from="Pivot/VisibilityArea" to="." method="_on_visibility_area_body_exited"]

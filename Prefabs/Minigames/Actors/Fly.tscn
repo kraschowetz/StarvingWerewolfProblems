@@ -1,18 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8wbrykkdgdmm"]
+[gd_scene load_steps=8 format=3 uid="uid://c8wbrykkdgdmm"]
 
-[ext_resource type="Texture2D" uid="uid://b1sd5a1jn0orf" path="res://Sprites/UI/Moon.png" id="1_uu4dc"]
+[ext_resource type="Texture2D" uid="uid://cir26m7tars73" path="res://Sprites/Actors/Fly.png" id="2_0xkdh"]
 [ext_resource type="Script" path="res://Scripts/Minigames/Fly.gd" id="2_li8w8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtgve"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk41v"]
+atlas = ExtResource("2_0xkdh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkua"]
+atlas = ExtResource("2_0xkdh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ndyi"]
+atlas = ExtResource("2_0xkdh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rfipr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk41v")
+}],
+"loop": true,
+"name": &"Tapped",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtkua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ndyi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Fly" type="Button"]
-offset_left = 1056.0
-offset_top = 576.0
-offset_right = 1080.0
-offset_bottom = 600.0
+offset_right = 24.0
+offset_bottom = 24.0
 scale = Vector2(3, 3)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vtgve")
-icon = ExtResource("1_uu4dc")
 flat = true
 icon_alignment = 1
 script = ExtResource("2_li8w8")
@@ -21,6 +52,12 @@ script = ExtResource("2_li8w8")
 autostart = true
 
 [node name="ExitTimer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_rfipr")
+autoplay = "default"
+centered = false
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

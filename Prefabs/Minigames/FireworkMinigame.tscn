@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwiddxl3e4nal"]
+
+[ext_resource type="Script" path="res://Scripts/Minigames/FireworkMinigame.gd" id="1_pvhnu"]
+[ext_resource type="PackedScene" uid="uid://ceuo2bbq2p6m7" path="res://Prefabs/Minigames/Actors/FierworkPerson.tscn" id="2_1hlqf"]
+[ext_resource type="PackedScene" uid="uid://dlc2xfvxyhq8a" path="res://Prefabs/Minigames/Actors/Firework.tscn" id="3_dgyye"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ru2yt"]
+
+[node name="FlySmackerMinigame" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pvhnu")
+person = ExtResource("2_1hlqf")
+firework = ExtResource("3_dgyye")
+
+[node name="BG" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.607843)
+position = Vector2(527.75, 287.75)
+scale = Vector2(1056.5, 576.5)
+texture = SubResource("CanvasTexture_ru2yt")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1054.0
+offset_bottom = 33.0
+text = "EXPLODE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireworkSpawner" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

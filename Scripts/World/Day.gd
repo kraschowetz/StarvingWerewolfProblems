@@ -19,3 +19,4 @@ func _ready() -> void:
 		
 		npc.position = possible_pos[pos]
 		call_deferred("add_child", npc)
+	

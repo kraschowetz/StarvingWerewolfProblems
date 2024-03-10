@@ -17,6 +17,8 @@ extends CharacterBody2D
 @export var light_pivot: Node2D
 @export var ref_pivot: Node2D
 
+@export var guard: bool
+
 var world_target: int 
 var exit_pos: int = -1
 var paths_ammount: int
@@ -30,25 +32,35 @@ var dead: bool = false
 func check_for_player() -> void:
 	if state != "wandering": return
 	
-	if position.distance_to(player.position) < 100:
-		state = "shooting"
-		shoot(player.position, "you was photografed", 2)
-		agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
-		speed = speed * 2.5
-		Global.popularity += base_fame_increase
-		Global.fear += base_infamy_increase
-		return
-	
-	ray.target_position = player.position - position
-	if !player_in_line_of_sight: return
-	if !ray.get_collider(): return
-	if ray.get_collider().name == "Player" && state == "wandering":
-		state = "shooting"
-		shoot(player.position, "you was photografed", 2)
-		agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
-		speed = speed * 2.5
-		Global.popularity += base_fame_increase
-		Global.fear += base_infamy_increase
+	if !guard:
+		if position.distance_to(player.position) < 100:
+			state = "shooting"
+			shoot(player.position, "you was photografed", 2)
+			agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
+			speed = speed * 2.5
+			Global.popularity += base_fame_increase
+			Global.fear += base_infamy_increase
+			return
+		
+		ray.target_position = player.position - position
+		if !player_in_line_of_sight: return
+		if !ray.get_collider(): return
+		if ray.get_collider().name == "Player" && state == "wandering":
+			state = "shooting"
+			shoot(player.position, "you was photografed", 2)
+			agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
+			speed = speed * 2.5
+			Global.popularity += base_fame_increase
+			Global.fear += base_infamy_increase
+	else:
+		ray.target_position = player.position - position
+		if !player_in_line_of_sight: return
+		if !ray.get_collider(): return
+		if ray.get_collider().name == "Player" && state == "wandering":
+			state = "chasing"
+			speed = 300
+			nav_timer.wait_time = .1
+			agent.set_navigation_layer_value(2, true)
 
 func _ready() -> void:
 	world_target = randi_range(0, world.civilian_target_pos.size() -1)
@@ -74,6 +86,15 @@ func _process(delta) -> void:
 				Global.popularity += base_fame_increase
 			queue_free()
 	
+	if state ==  "chasing" && position.distance_to(player.position) < 48:
+		Global.hunger += 25
+		Global.current_trans_data = ["%s" % Global.hunger, "HUNGER", "res://Scenes/Day.tscn", "THE SUN RISES"]
+		Global.popularity -= 10
+		Global.popularity = 0 if Global.popularity < 0 else Global.popularity
+		Global.fear += base_infamy_increase * 2
+		Global.spotted_lvl = 3
+		
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Transition.tscn")
 	
 	if light_pivot && state != "shooting":
 		ref_pivot.look_at(agent.get_next_path_position())
@@ -96,6 +117,10 @@ func shoot(_pos: Vector2, _txt: String, _p: int) -> void:
 	light.color = Color("777777")
 
 func _on_timer_timeout():
+	if state == "chasing":
+		agent.target_position = player.position
+		return
+	
 	if exit_pos < 0 && state == "scared": return
 	
 	if position.distance_to(agent.target_position) < 48:
@@ -106,11 +131,11 @@ func _on_timer_timeout():
 		exit_pos = randi_range(0, world.civilian_start_pos.size() -1)
 		agent.target_position = world.civilian_start_pos[exit_pos]
 		return
-	
+		
 	agent.target_position = world.civilian_target_pos[world_target]
 
 func _on_area_2d_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" && !guard:
 		speed = 0
 		Global.hunger -= 4
 		$Sprite2D.texture = _skull
@@ -131,9 +156,9 @@ func _on_photo_timer_timeout():
 	state = "scared"
 
 func _on_visibility_area_area_entered(area):
+	if guard: return
 	if area.get_parent().get_class() == "CharacterBody2D" && area.get_parent().dead:
 		state = "shooting"
-		print("elias jabur")
 		speed = speed * 2.5
 		agent.target_position = world.civilian_start_pos[randi_range(0, world.civilian_start_pos.size() -1)]
 		Global.popularity += base_fame_increase

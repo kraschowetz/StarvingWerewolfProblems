@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://br0hsg7u7pafv"]
+
+[ext_resource type="Texture2D" uid="uid://dxsagfr5ymrsw" path="res://Sprites/Actors/Baloon.png" id="1_v0mo1"]
+[ext_resource type="Script" path="res://Scripts/Minigames/Balloon.gd" id="2_y30e7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6yei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apnjy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xq7fe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c64q8"]
+
+[node name="Balloon" type="Button"]
+offset_right = 72.0
+offset_bottom = 72.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s6yei")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_apnjy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xq7fe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c64q8")
+button_mask = 7
+icon = ExtResource("1_v0mo1")
+flat = true
+expand_icon = true
+script = ExtResource("2_y30e7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

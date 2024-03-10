@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://ve6x7btq0w5v"]
+
+[ext_resource type="Script" path="res://Scripts/World/GameOverScreen.gd" id="1_4vgrp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ym63n"]
+
+[node name="GameOverScreen" type="Node2D" node_paths=PackedStringArray("main", "sub")]
+script = ExtResource("1_4vgrp")
+main = NodePath("Label")
+sub = NodePath("Label2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(528.25, 287.25)
+scale = Vector2(1057.5, 575.5)
+texture = SubResource("CanvasTexture_ym63n")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1056.0
+offset_bottom = 573.0
+theme_override_font_sizes/font_size = 30
+text = "YOU GOT KICKED OUT OF YOUR HOUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+offset_right = 1056.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0.286275, 0.286275, 0.286275, 1)
+theme_override_font_sizes/font_size = 30
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 495.0
+offset_right = 1056.0
+offset_bottom = 523.0
+theme_override_font_sizes/font_size = 25
+text = "the debt consumed you"
+horizontal_alignment = 1
+vertical_alignment = 1

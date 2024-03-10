@@ -28,6 +28,7 @@ func _process(delta) -> void:
 	if !check_if_visible() && !tapped:
 		dir = position.direction_to(Vector2(467, 243)).normalized()
 	
+	$Sprite2D.flip_h = dir.x < 0
 	position += dir * speed * delta
 
 func _on_timer_timeout():
@@ -38,6 +39,8 @@ func _on_pressed():
 	dir = Vector2.DOWN
 	tapped = true
 	game.update_score()
+	$Sprite2D.play("Tapped")
+	$Sprite2D.self_modulate = Color("777777")
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "speed", 9000, 10)

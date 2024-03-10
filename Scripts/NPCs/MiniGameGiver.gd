@@ -29,6 +29,7 @@ func _process(_delta) -> void:
 	if Global.in_minigame: return
 	
 	var game = minigame.instantiate()
+	Global.in_minigame = true
 	closed = true
 	label.visible = false
 	get_node("../CanvasLayer").call_deferred("add_child", game)

@@ -9,6 +9,7 @@ func _on_area_2d_body_entered(body):
 	Global.debt -= Global.money
 	if Global.debt < 1:
 		Global.debt = 1
+	print(Global.debt)
 	
 	hint_text.display_text("you paid off your debts")
 	

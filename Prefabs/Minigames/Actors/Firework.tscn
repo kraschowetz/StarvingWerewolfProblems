@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlc2xfvxyhq8a"]
+
+[ext_resource type="Texture2D" uid="uid://5743cbpipx26" path="res://Sprites/UI/Sun.png" id="1_yc13v"]
+[ext_resource type="Script" path="res://Scripts/Minigames/Firework.gd" id="2_iu6ai"]
+[ext_resource type="PackedScene" uid="uid://dyncgxopu0i4a" path="res://Prefabs/FX/FireworkFX.tscn" id="3_22gfa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4uklc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0jrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ihf41"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a123f"]
+
+[node name="FireWork" type="Button"]
+offset_left = 541.0
+offset_top = 517.0
+offset_right = 565.0
+offset_bottom = 543.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4uklc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i0jrq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ihf41")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a123f")
+icon = ExtResource("1_yc13v")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_iu6ai")
+fx = ExtResource("3_22gfa")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyncgxopu0i4a"]
+
+[ext_resource type="Script" path="res://Scripts/FX/FireworkFX.gd" id="1_bpk17"]
+[ext_resource type="Texture2D" uid="uid://fkxbfkyro517" path="res://Sprites/FX/Particles/FireworkParticle_1.png" id="1_u7b2k"]
+[ext_resource type="Texture2D" uid="uid://bqhugklj2dr5c" path="res://Sprites/FX/Particles/FireworkParticle_2.png" id="2_ek7x6"]
+[ext_resource type="Texture2D" uid="uid://bth3m3qdnjfxa" path="res://Sprites/FX/Particles/FireworkPArticle_3.png" id="3_qihuh"]
+[ext_resource type="Texture2D" uid="uid://bs6pbdi7plio6" path="res://Sprites/FX/Particles/FIreworkParticle_4.png" id="4_bf1v5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r0nue"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 64.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+
+[node name="FireworkFX" type="Node2D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_bpk17")
+particles = [NodePath("GPUParticles2D"), NodePath("GPUParticles2D2"), NodePath("GPUParticles2D3"), NodePath("GPUParticles2D4")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(12, 12)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_r0nue")
+texture = ExtResource("1_u7b2k")
+one_shot = true
+explosiveness = 1.0
+trail_lifetime = 0.1
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(12, 12)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_r0nue")
+texture = ExtResource("2_ek7x6")
+one_shot = true
+explosiveness = 1.0
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+position = Vector2(12, 12)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_r0nue")
+texture = ExtResource("3_qihuh")
+one_shot = true
+explosiveness = 1.0
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+position = Vector2(12, 12)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_r0nue")
+texture = ExtResource("4_bf1v5")
+one_shot = true
+explosiveness = 1.0

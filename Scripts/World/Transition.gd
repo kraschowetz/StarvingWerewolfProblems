@@ -7,6 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	var i: int = 0 if Global.current_trans_data[1] == "DEBT" else 1
+	print(Global.current_trans_data)
 	
 	bar.size.y = 288 / (100 / Global.last_trans_val[i])
 	print(Global.last_trans_val[i])
@@ -24,6 +25,9 @@ func _ready() -> void:
 
 func on_tween_fineshed() -> void:
 	await get_tree().create_timer(2).timeout
+	if Global.debt >= 100 || Global.hunger >= 100:
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/GameOverScreen.tscn")
+		return
 	if Global.current_trans_data[1] == "DEBT":
 		get_tree().call_deferred("change_scene_to_file", Global.current_trans_data[2])
 	else:

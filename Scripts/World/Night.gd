@@ -4,6 +4,7 @@ extends Node2D
 
 @export var civilian_target_pos: Array[Vector2]
 @export var civilian_start_pos: Array[Vector2]
+@export var guard: PackedScene
 @export var civilian: PackedScene
 @export var journalist: PackedScene
 
@@ -14,10 +15,13 @@ func _ready() -> void:
 	var n: int = randi_range(2, 4) + (1.5 * (Global.popularity / 5))
 	
 	for i in range(n):
-		if randi_range(1, 100) < (15 if Global.popularity < 15 else Global.popularity) || Global.popularity < 1:
+		if randi_range(1, 100) < (15 if Global.popularity < 45 else Global.popularity) || Global.popularity < 1:
 			npc_queue.append(journalist)
 			if Global.popularity < 1:
 				Global.popularity += 1
+			continue
+		if randi_range(1, 100) < (20 if Global.fear < 40 else Global.fear / 2):
+			npc_queue.append(guard)
 			continue
 		npc_queue.append(civilian)
 
